@@ -13,6 +13,17 @@ isEmpty -> check the number of people in the line.
 isFull -> the waiting area can only hold 5 people at a time, if a new person comes, sorry you can't wait in the line, checks the capacity of the line.
 delete -> serve everyone in the queue or tell them we have no more coffee
 create -> start a new line
+
+Queues can be implemented using:
+1. Python Lists.
+2. LinkedLists.
+
+There are also various types of queues:
+1. Priority Queue -> where customers are served based on their importance.
+2. 
+
+
+There is also a circular linkedlist
 """
 
 class Queue:
@@ -60,3 +71,13 @@ print(f'after dequeue {testQueue}')
 print(f'peeking {testQueue.peek()}')
 testQueue.delete()
 print(f'after delete {testQueue}')
+
+
+
+# Circular Queues
+class CircularQueue:
+    def __init__(self, max_size):
+        self.items = [None] * max_size
+        self.max_size = max_size
+        self.start = -1
+        self.top = -1
