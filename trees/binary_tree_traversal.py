@@ -55,18 +55,28 @@ class Tree:
         print(root.value)
         
     def countLeafNodes(self, root):
-        leafs = 0
+        if not root:
+            return 0
         
-        def count(root, leafs):
-            if not root:
-                leafs += 1
-                return
-            
-            count(root.left)
-            count(root.right)
-            
-        count(root, leafs=leafs)  
-        print(leafs)
+        if not root.left and not root.right:
+            return 1
+        
+        return self.countLeafNodes(root.left) + self.countLeafNodes(root.right)
+        
+    def countNodes(self, root):
+        if not root:
+            return 0
+        
+        total = 1 + (self.countNodes(root.left) + self.countNodes(root.right))
+        return total
+    
+    def max_depth(self, root):
+        
+        if not root:
+            return 0
+        
+        max_ = 1 + max(self.max_depth(root.left), self.max_depth(root.right))
+        return max_
         
         
 tree = Tree()
@@ -89,4 +99,5 @@ left.right = left_child_right
 # print("\n")
 # tree.postOrder(root=root)
 
-tree.countLeafNodes(root=root)
+# print(tree.max_depth(root=root))
+print(tree.countLeafNodes(root=root))
