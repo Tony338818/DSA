@@ -77,21 +77,51 @@ class Tree:
         
         max_ = 1 + max(self.max_depth(root.left), self.max_depth(root.right))
         return max_
+    
+    def search(self, root, target):
+        if not root:
+            return False
+        
+        if root.value == target:
+            return True
+        
+        left = self.search(root.left, target)
+        right = self.search(root.right, target)
+        
+        
+        return left or right
+    
+    def sumLeft(self, root):
+        
+        def dfs(root, isLeft):
+            if not root:
+                return 0
+            
+            if not root.left and not root.right and isLeft:
+                return root.value
+            
+            left = dfs(root.left, True) 
+            right = dfs(root.right, False)
+            
+            return left + right
+        
+        return dfs(root, False)
+            
         
         
 tree = Tree()
 
-root = TreeNode('A')
-left = TreeNode('B')
-right = TreeNode('C')
-left_child_left = TreeNode('D')
-left_child_right = TreeNode('E')
+root = TreeNode(1)
+left = TreeNode(2)
+right = TreeNode(3)
+left_child_left = TreeNode(4)
+left_child_right = TreeNode(5)
 
 
 root.left = left
 root.right = right
-left.left = left_child_left
-left.right = left_child_right
+right.left = left_child_left
+right.right = left_child_right
 
 # tree.preOrder(root=root)
 # print("\n")
@@ -100,4 +130,6 @@ left.right = left_child_right
 # tree.postOrder(root=root)
 
 # print(tree.max_depth(root=root))
-print(tree.countLeafNodes(root=root))
+# print(tree.countLeafNodes(root=root))
+# print(tree.search(root=root, target='G'))
+print(tree.sumLeft(root=root))
